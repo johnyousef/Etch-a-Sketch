@@ -42,7 +42,7 @@ function main() {
     });
 
     // if the user changes the color
-    color_input.addEventListener("change", () => {
+    color_input.addEventListener("click", () => {
         // change old color to new color and turn rgb off
         color = turn_to_rgb(color_input.value)[0];
         red_value = turn_to_rgb(color_input.value)[1];
