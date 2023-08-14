@@ -21,3 +21,7 @@ div.grid-element {
 div.grid-element.colored {
     background-color: black;
 }
+
+.on {
+    background-color: rgb(179, 0, 0);
+}

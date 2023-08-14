@@ -11,12 +11,10 @@ const random_color = ``;
 let rgb_on = false;
 let shader_on = false;
 grid_size_input.value = 16;
-grid_size_desplay.textContent = "16";
 let grid_size = grid_size_input.value;
 let red_value = 0;
 let green_value = 0;
 let blue_value = 0;
-
 
 function main() {
     make_grid(grid_size);   
@@ -24,33 +22,43 @@ function main() {
     
     shader_button.addEventListener("click", () => {
         rgb_on = false;
-        shader_on = true;
+        rgb_button.setAttribute("class", "rgb-button");
+        shader_on = !shader_on;
+
+        if (shader_on) {
+            shader_button.setAttribute("class", "shader-button on");
+        }else {
+            shader_button.setAttribute("class", "shader-button");
+        }
     });
 
     // if the user clicks on the rgb button 
     rgb_button.addEventListener("click", () => {
-        // rgb coloring will be on
-        rgb_on = true;
         shader_on = false;
+        shader_button.setAttribute("class", "shader-button");
+        rgb_on = !rgb_on;
+
+        if (rgb_on) {
+            rgb_button.setAttribute("class", "rgb-button on");
+        }else {
+            rgb_button.setAttribute("class", "rgb-button");
+        }
     });
 
     // when user changes size of the grid
     grid_size_input.addEventListener("input", () => {
         // update the value
         grid_size = grid_size_input.value;
-        grid_size_desplay.textContent = `${grid_size}`;
+        grid_size_desplay.textContent = `${grid_size}x${grid_size}`;
     });
 
     // if the user changes the color
-    color_input.addEventListener("click", () => {
+    color_input.addEventListener("change", () => {
         // change old color to new color and turn rgb off
         color = turn_to_rgb(color_input.value)[0];
         red_value = turn_to_rgb(color_input.value)[1];
         green_value = turn_to_rgb(color_input.value)[2];
         blue_value = turn_to_rgb(color_input.value)[3];
-
-        rgb_on = false;
-        shader_on = false;
     });
 
 
@@ -159,6 +167,7 @@ function delete_grid(num_of_grids_each_side) {
 function clear_all(num_of_grids_each_side) {
     for (let i = 0; i < num_of_grids_each_side ** 2; i++) {
         grid_container.childNodes[i].style.cssText += "background-color: rgb(255, 255, 255);";
+        grid_container.childNodes[i].setAttribute("data_rgb_values", "255,255,255");
     }
 }
 
