@@ -3,11 +3,6 @@ h1.main-header {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
-.Sketch_container {
-    display: flex;
-    justify-content: center;
-}
-
 .inputs-container {
     display: flex;
     flex-direction: column;
@@ -22,6 +17,7 @@ h1.main-header {
     display: flex;
     justify-content: center;
     gap: 20px;
+    flex-wrap: wrap-reverse;
 }
 
 div.grid-container {
