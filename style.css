@@ -3,12 +3,34 @@ h1.main-header {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
+.Sketch_container {
+    display: flex;
+    justify-content: center;
+}
+
+.inputs-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    width: min-content;
+    flex-grow: 0;
+}
+
+.Sketch_container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
 div.grid-container {
     box-shadow: 0px 0px 10px black ;
     height: 500px;
     width: 500px;
-    margin: 18px auto;
     display: flex;
+    flex-shrink: 0;
+    flex-grow: 0;
     justify-content: space-around;
     flex-flow: row;
     flex-wrap: wrap;
@@ -24,4 +46,33 @@ div.grid-element.colored {
 
 .on {
     background-color: rgb(179, 0, 0);
+}
+
+h4 {
+    margin: 0px;
+}
+
+.color-input {
+    width: 80px;
+    height: 80px;
+    padding: 0px;
+    margin: 0px;
+    border: none;
+}
+
+button {
+    padding: 10px 20px;
+    min-height: 41px;
+    min-width: 150px;
+    text-align: center;
+    border: 1px solid black;
+    border-radius: 6px;
+}
+
+button:hover{
+    box-shadow: 0px 0px 10px black ;
+}
+
+.grid-size-changer {
+    width: 150px;
 }
