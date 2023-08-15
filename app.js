@@ -6,10 +6,12 @@ const grid_size_input = document.querySelector(".grid-size-changer");
 const grid_size_desplay = document.querySelector(".grid-size-desplay");
 const creat_new_grid_button = document.querySelector(".creat-new-grid");
 const shader_button = document.querySelector(".shader-button");
+const eraser_button = document.querySelector(".eraser-button");
 
 const random_color = ``;
 let rgb_on = false;
 let shader_on = false;
+let eraser_on = false;
 grid_size_input.value = 16;
 let grid_size = grid_size_input.value;
 let red_value = 0;
@@ -20,28 +22,38 @@ function main() {
     make_grid(grid_size);   
     let color = "rgb(0, 0, 0)";
     
+        eraser_button.addEventListener("click", () => {
+        shader_on = turn_off(shader_button, "shader-button");
+        rgb_on = turn_off(rgb_button, "rgb-button");
+
+        if (eraser_on) {
+            eraser_on = turn_off(eraser_button, "eraser-button");
+        }else {
+            eraser_on = turn_on(eraser_button, "eraser-button");
+        }
+    });
+
+
     shader_button.addEventListener("click", () => {
-        rgb_on = false;
-        rgb_button.setAttribute("class", "rgb-button");
-        shader_on = !shader_on;
+        rgb_on = turn_off(rgb_button, "rgb-button");
+        eraser_on = turn_off(eraser_button, "eraser-button");
 
         if (shader_on) {
-            shader_button.setAttribute("class", "shader-button on");
+            shader_on = turn_off(shader_button, "shader-button");
         }else {
-            shader_button.setAttribute("class", "shader-button");
+            shader_on = turn_on(shader_button, "shader-button");
         }
     });
 
     // if the user clicks on the rgb button 
     rgb_button.addEventListener("click", () => {
-        shader_on = false;
-        shader_button.setAttribute("class", "shader-button");
-        rgb_on = !rgb_on;
+        shader_on = turn_off(shader_button, "shader-button");
+        eraser_on = turn_off(eraser_button, "eraser-button");
 
         if (rgb_on) {
-            rgb_button.setAttribute("class", "rgb-button on");
+            rgb_on = turn_off(rgb_button, "rgb-button");
         }else {
-            rgb_button.setAttribute("class", "rgb-button");
+            rgb_on = turn_on(rgb_button, "rgb-button");
         }
     });
 
@@ -93,8 +105,11 @@ function main() {
             rgb_array = e.target.attributes.data_rgb_values.value.split(",");
             grid_element.style.cssText += `background-color: rgb(${rgb_array[0]-25.5}, ${rgb_array[1]-25.5}, ${rgb_array[2]-25.5})`;
             grid_element.setAttribute("data_rgb_values", `${rgb_array[0]-25.5},${rgb_array[1]-25.5},${rgb_array[2]-25.5}`);
+        }else if (eraser_on){
+            grid_element.style.cssText += `background-color: rgb(255, 255, 255);`;
+            grid_element.setAttribute("data_rgb_values", `255,255,255`);    
         }else{
-            grid_element.style.cssText += `background-color: ${color};`
+            grid_element.style.cssText += `background-color: ${color};`;
             grid_element.setAttribute("data_rgb_values", `${red_value},${green_value},${blue_value}`);
         }
 
@@ -102,6 +117,16 @@ function main() {
 
     });
 
+}
+
+function turn_off(button, button_class_name) {
+    button.setAttribute("class", `${button_class_name}`);
+    return false;
+}
+
+function turn_on(button, button_class_name) {
+    button.setAttribute("class", `${button_class_name} on`);
+    return true;
 }
 
 function turn_to_rgb(hex_color) {
